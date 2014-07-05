@@ -1,0 +1,31 @@
+{
+  "name": "latemate",
+  "version": "0.0.1",
+  "description": "crowdsourcing for GTFS data",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tamarasaurus/latemate.git"
+  },
+  "keywords": [
+    "gtfs",
+    "crowdsourcing",
+    "api"
+  ],
+  "author": "Tamara Chahine",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tamarasaurus/latemate/issues"
+  },
+  "homepage": "https://github.com/tamarasaurus/latemate",
+  "dependencies": {
+    "body-parser": "^1.4.3",
+    "bytes": "^1.0.0",
+    "cookie-parser": "^1.3.2",
+    "express": "^4.5.0",
+    "morgan": "^1.1.1"
+  }
+}
