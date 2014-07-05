@@ -1,8 +1,11 @@
+'use strict';
 var express = require('express');
 var gtfs = require('gtfs');
 var app = express();
 
-
+app.use(express.static(__dirname + '/public'));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
 
 app.get('/', function(req, res) {
 	res.json('hello world');
@@ -10,26 +13,24 @@ app.get('/', function(req, res) {
 
 app.get('/api/agencies', function(req, res) {
 	gtfs.agencies(function(e, data) {
-		console.log("AGENCIES:", data.length);
 		res.json(data || {
 			error: 'No agencies in database'
 		});
 	});
 });
 
-
 // Routes and agencies
 app.get('/api/routes/:agency', function(req, res) {
 	var agency_key = req.params.agency;
 	gtfs.getRoutesByAgency(agency_key, function(e, data) {
-		console.log(data);
+
 		res.send(data || {
 			error: 'No routes for agency_key ' + agency_key
 		});
 	});
 });
 
-app.get('/api/routesNearby/:lat/:lon/:radiusInMiles', function(req, res) {
+app.get('/api/routes_near/:lat/:lon/:radiusInMiles', function(req, res) {
 	var lat = req.params.lat,
 		lon = req.params.lon,
 		radius = req.params.radiusInMiles;
@@ -39,7 +40,7 @@ app.get('/api/routesNearby/:lat/:lon/:radiusInMiles', function(req, res) {
 		});
 	});
 });
-app.get('/api/routesNearby/:lat/:lon', function(req, res) {
+app.get('/api/routes_near/:lat/:lon', function(req, res) {
 	var lat = req.params.lat,
 		lon = req.params.lon;
 	gtfs.getRoutesByDistance(lat, lon, function(e, data) {
@@ -71,7 +72,7 @@ app.get('/api/stops/:agency/:route_id', function(req, res) {
 	});
 });
 
-app.get('/api/stopsNearby/:lat/:lon/:radiusInMiles', function(req, res) {
+app.get('/api/stops_near/:lat/:lon/:radiusInMiles', function(req, res) {
 	var lat = req.params.lat,
 		lon = req.params.lon,
 		radius = req.params.radiusInMiles;
@@ -81,13 +82,16 @@ app.get('/api/stopsNearby/:lat/:lon/:radiusInMiles', function(req, res) {
 		});
 	});
 });
-app.get('/api/stopsNearby/:lat/:lon', function(req, res) {
+app.get('/api/stops_near/:lat/:lon', function(req, res) {
 	var lat = req.params.lat,
 		lon = req.params.lon;
 	gtfs.getStopsByDistance(lat, lon, function(e, data) {
-		res.send(data || {
-			error: 'No stops within default radius'
-		});
+
+        res.render('map.jade', { title : 'Home', data: data} );
+
+		// res.send(data || {
+		// 	error: 'No stops within default radius'
+		// });
 	});
 });
 
