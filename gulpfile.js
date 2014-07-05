@@ -23,20 +23,19 @@ gulp.task('serve', function() {
 
 // stylus
 gulp.task('stylus', function() {
-	gulp.src('src/css/**/*.styl')
+	gulp.src('./src/css/**/*.styl')
 		.pipe(stylus())
 		.pipe(prefix("last 1 version", "> 1%", "ie 8", "ie 7"))
-		.pipe(gulp.dest('./build/css'));
+		.pipe(gulp.dest('./public/css'));
 
 });
 
-
 //browserify
 gulp.task('browserify', function() {
-	gulp.src('js/*.js')
+	gulp.src('./src/js/*.js')
 		.pipe(browserify())
 		.pipe(concat('bundle.js'))
-		.pipe(gulp.dest('./build'));
+		.pipe(gulp.dest('./public/js'));
 });
 
 gulp.task('default', ['browserify', 'stylus', 'serve']);

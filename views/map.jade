@@ -1,9 +1,10 @@
 doctype
 html
-  head
-    title #{title} - Map of Stops
+  include includes/header
+  include includes/styles
   body
-    header
-      h1 Map of stops
     .container
-        pre(font-size="15")= data
+        .row
+            .col-xs-12
+               pre(font-size="15")= data
+    include includes/scripts
