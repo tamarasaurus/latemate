@@ -1,0 +1,16 @@
+#map {
+  width: 100%;
+  height: 400px;
+}
+.location-search {
+  margin-bottom: 15px;
+  display: block;
+}
+.stop-icon {
+  width: 10px;
+  height: 10px;
+  display: block;
+  border-radius: 10px;
+  background: #0ebfe9;
+  border: 1px rgba(255,255,255,0.4) solid;
+}

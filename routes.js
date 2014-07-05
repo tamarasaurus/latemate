@@ -77,15 +77,22 @@ module.exports = function routes(app){
             });
         });
     });
+
+
     app.get('/api/stops_near/:lat/:lon', function(req, res) {
         var lat = req.params.lat,
             lon = req.params.lon;
         gtfs.getStopsByDistance(lat, lon, function(e, data) {
-            res.render('map.jade', { title : 'Home', data: data} );
+            res.json(data || {error: 'No stops found'});
+            // res.render('map.jade', { title : 'stops near location', data: data} );
             // res.send(data || {
             //  error: 'No stops within default radius'
             // });
         });
+    });
+
+    app.get('/stops', function(req, res){
+        res.render('map.jade', { title : 'stops near location'} );
     });
 
     //Times

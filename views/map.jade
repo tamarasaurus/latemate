@@ -3,8 +3,17 @@ html
   include includes/header
   include includes/styles
   body
+    include includes/nav
     .container
         .row
             .col-xs-12
-               pre(font-size="15")= data
+               h1 Find stops near a location
+            .col-xs-4
+               .location-search
+                   .input-group
+                      input.form-control.latlng(type="text", placeholder="latitude,longitude")
+                      .input-group-addon.get-location Go
+            .col-xs-12
+               div(id="map")
+               //- pre(font-size="15")= data
     include includes/scripts
